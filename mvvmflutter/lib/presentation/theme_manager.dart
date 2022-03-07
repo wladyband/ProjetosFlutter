@@ -7,6 +7,12 @@ ThemeData getApplicationTheme(){
     primaryColorLight: ColorManager.primaryOpacity70,
     primaryColorDark: ColorManager.darkPrimary,
     disabledColor: ColorManager.grey1,
-    accentColor: ColorManager.grey
+    accentColor: ColorManager.grey,
+
+  cardTheme: CardTheme(
+    color: ColorManager.white,
+    shadowColor: ColorManager.grey,
+    elevation: AppSize.s4)
+
   );
 }
