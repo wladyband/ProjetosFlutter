@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/presentation/resources/resources.dart';
 import '/presentation/views.dart';
 
 class Routes {
@@ -35,13 +36,14 @@ class RouterGenerator {
 
 static Route<dynamic> unDefindedRoute () {
   return MaterialPageRoute(builder: (_) => Scaffold(
-    appBar: AppBar(
-      title: Text("O caminho não foi encontrado"),
+      appBar: AppBar(
+        title: Text(AppStrings.noRouteFound),
+      ),
+      body: Center(
+        child: Text(AppStrings.noRouteFound),
+      ),
     ),
-    body: Center(
-      child: Text("O caminho não foi encontrado"),
-    ),
-  ));
+  );
 }
 
 }
