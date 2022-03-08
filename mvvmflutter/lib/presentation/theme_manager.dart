@@ -41,6 +41,16 @@ ThemeData getApplicationTheme(){
     ),      
   ),
 
+  textTheme: TextTheme(
+    headline1: getSemiBoldStyle(
+        color: ColorManager.darkGrey,
+        fontSize: FontSize.s16),
+    subtitle1: getRegularStyle(
+        color: ColorManager.grey),
+    caption: getRegularStyle(
+        color: ColorManager.grey)
+    )
+
 
 
   );
