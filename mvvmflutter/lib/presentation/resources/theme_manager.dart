@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/presentation/presentation.dart';
+import '/presentation/resources/resources.dart';
 
 ThemeData getApplicationTheme(){
   return ThemeData(
@@ -79,7 +79,7 @@ ThemeData getApplicationTheme(){
       borderRadius: BorderRadius.all(Radius.circular(AppSize.s8),
       ),
   ),
-  
+
   focusedErrorBorder: OutlineInputBorder(
     borderSide: BorderSide(
         color: ColorManager.error,

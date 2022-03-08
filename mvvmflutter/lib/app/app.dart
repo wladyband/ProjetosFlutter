@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvvmflutter/presentation/presentation.dart';
+import '/presentation/resources/resources.dart';
 
 class MyApp extends StatefulWidget {
 
