@@ -84,7 +84,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: SvgPicture.asset(ImageAssets.leftArrowIc),
             ),
             onTap: () {
-
+                _pageController.animateToPage(
+                    _getPreviousIndex(),
+                    duration:Duration(milliseconds: DurationConstant.d300),
+                    curve: Curves.bounceInOut
+                );
             },
           ),
         ),
@@ -104,13 +108,34 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: SvgPicture.asset(ImageAssets.leftArrowIc),
             ),
             onTap: () {
-
+              _pageController.animateToPage(
+                  _getNextIndex(),
+                  duration:Duration(milliseconds: DurationConstant.d300),
+                  curve: Curves.bounceInOut
+              );
             },
           ),
         ),
       ],
     );
   }
+
+  int _getPreviousIndex() {
+    int previuosIndex = _currentIndex --;
+    if(previuosIndex == -1) {
+      _currentIndex = _list.length -1;
+    }
+    return _currentIndex;
+  }
+
+  int _getNextIndex() {
+    int nextIndex = _currentIndex ++;
+    if(nextIndex >= _list.length) {
+      _currentIndex = 0;
+    }
+    return _currentIndex;
+  }
+
   Widget _getProperCircle(int index) {
       if(index == _currentIndex) {
         return SvgPicture.asset(ImageAssets.hollowCirlceIc);
