@@ -11,5 +11,5 @@ class AppStrings {
   static const String onBoardingSubTitle2 = "Ver um bom curso utilzando arquitetura limpa #2";
   static const String onBoardingSubTitle3 = "Ver um bom curso utilzando arquitetura limpa #3";
   static const String onBoardingSubTitle4 = "Ver um bom curso utilzando arquitetura limpa #4";
-
+  static const String skip = "Skip";
 }
