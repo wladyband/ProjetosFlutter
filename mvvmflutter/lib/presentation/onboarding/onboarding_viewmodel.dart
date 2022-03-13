@@ -2,7 +2,6 @@ import 'dart:async';
 
 import '/domain/model.dart';
 import '/presentation/base/baseviewmodel.dart';
-
 import '../resources/resources.dart';
 
 class OnBoardingViewModel extends BaseViewModel
@@ -27,17 +26,26 @@ class OnBoardingViewModel extends BaseViewModel
 
   @override
   void goNext() {
-    // TODO: implement goNext
+    int nextIndex = _currentIndex ++;
+    if(nextIndex >= _list.length) {
+      _currentIndex = 0;
+    }
+    _postDataToView();
   }
 
   @override
   void goPrevious() {
-    // TODO: implement goPrevious
+    int previuosIndex = _currentIndex --;
+    if(previuosIndex == -1) {
+      _currentIndex = _list.length -1;
+    }
+    _postDataToView();
   }
 
   @override
   void onPageChanged(int index) {
-    // TODO: implement onPageChanged
+    _currentIndex = index;
+    _postDataToView();
   }
 
   @override
