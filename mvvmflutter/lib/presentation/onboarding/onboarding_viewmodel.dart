@@ -1,7 +1,9 @@
 import 'dart:async';
 
-import 'package:mvvmflutter/domain/model.dart';
-import 'package:mvvmflutter/presentation/base/baseviewmodel.dart';
+import '/domain/model.dart';
+import '/presentation/base/baseviewmodel.dart';
+
+import '../resources/resources.dart';
 
 class OnBoardingViewModel extends BaseViewModel
     with OnBoardingViewModelInputs,
@@ -9,15 +11,18 @@ class OnBoardingViewModel extends BaseViewModel
 
   final StreamController _streamController =
   StreamController<SliderViewObject>();
+  late final List<SliderObject> _list;
+  int _currentIndex = 0;
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    _streamController.close();
   }
 
   @override
   void start() {
-    // TODO: implement start
+    _list = _getSliderData();
+    _postDataToView();
   }
 
   @override
@@ -36,13 +41,28 @@ class OnBoardingViewModel extends BaseViewModel
   }
 
   @override
-  // TODO: implement inputSliderViewObject
-  Sink get inputSliderViewObject => throw UnimplementedError();
+  Sink get inputSliderViewObject => _streamController.sink;
 
   @override
-  // TODO: implement outputSliderViewObject
-  Stream<SliderViewObject> get outputSliderViewObject => throw UnimplementedError();
+  Stream<SliderViewObject> get outputSliderViewObject =>
+      _streamController.stream.map((sliderViewObject) => sliderViewObject);
 
+  List<SliderObject> _getSliderData() => [
+    SliderObject.name(AppStrings.onBoardingTitle1,
+        AppStrings.onBoardingSubTitle1, ImageAssets.onboardingLogo1),
+    SliderObject.name(AppStrings.onBoardingTitle2,
+        AppStrings.onBoardingSubTitle2, ImageAssets.onboardingLogo2),
+    SliderObject.name(AppStrings.onBoardingTitle3,
+        AppStrings.onBoardingSubTitle3, ImageAssets.onboardingLogo3),
+    SliderObject.name(AppStrings.onBoardingTitle4,
+        AppStrings.onBoardingSubTitle4, ImageAssets.onboardingLogo4),
+  ];
+  _postDataToView() {
+    inputSliderViewObject.add(
+        SliderViewObject(_list[_currentIndex],
+            _list.length,
+            _currentIndex));
+  }
 }
 
 abstract class OnBoardingViewModelInputs {
