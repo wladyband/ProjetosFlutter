@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mvvmflutter/presentation/onboarding/onboarding_main.dart';
 import 'package:mvvmflutter/presentation/resources/resources.dart';
+
+import '../../domain/model.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({Key? key}) : super(key: key);
@@ -13,13 +16,24 @@ class OnBoardingView extends StatefulWidget {
 class _OnBoardingViewState extends State<OnBoardingView> {
 
   PageController _pageController = PageController(initialPage: 0);
+  OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
-  int _currentIndex = 0;
+  _bind() {
+    _viewModel.start();
+  }
 
-
+  @override
+  void initState () {
+    _bind();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    return _getContentWidget();
+  }
+
+  Widget _getContentWidget() {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
@@ -31,7 +45,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         ),
       ),
       body: PageView.builder(
-        controller: _pageController,
+          controller: _pageController,
           itemCount: _list.length,
           onPageChanged: (index) {
             setState(() {
@@ -52,11 +66,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 child: Text(
                   AppStrings.skip,
                   style: Theme
-                  .of(context)
-                  .textTheme
-                  .subtitle2,
+                      .of(context)
+                      .textTheme
+                      .subtitle2,
                   textAlign: TextAlign.end,
-                  ),
+                ),
               ),
             ),
             _getBottomSheetWidget()
@@ -65,7 +79,6 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       ),
     );
   }
-
 
   Widget _getBottomSheetWidget() {
     return Container(
@@ -118,22 +131,6 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     );
   }
 
-  int _getPreviousIndex() {
-    int previuosIndex = _currentIndex --;
-    if(previuosIndex == -1) {
-      _currentIndex = _list.length -1;
-    }
-    return _currentIndex;
-  }
-
-  int _getNextIndex() {
-    int nextIndex = _currentIndex ++;
-    if(nextIndex >= _list.length) {
-      _currentIndex = 0;
-    }
-    return _currentIndex;
-  }
-
   Widget _getProperCircle(int index) {
       if(index == _currentIndex) {
         return SvgPicture.asset(ImageAssets.hollowCirlceIc);
@@ -143,6 +140,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   }
   @override
   void dispose() {
+    _viewModel.dispose();
     super.dispose();
   }
 }
