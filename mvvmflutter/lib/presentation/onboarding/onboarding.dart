@@ -10,11 +10,10 @@ class OnBoardingView extends StatefulWidget {
   const OnBoardingView({Key? key}) : super(key: key);
 
   @override
-  State<OnBoardingView> createState() => _OnBoardingViewState();
+  _OnBoardingViewState createState() => _OnBoardingViewState();
 }
 
 class _OnBoardingViewState extends State<OnBoardingView> {
-
   PageController _pageController = PageController(initialPage: 0);
   OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
@@ -23,70 +22,79 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   }
 
   @override
-  void initState () {
+  void initState() {
     _bind();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _getContentWidget();
+    return StreamBuilder<SliderViewObject>(
+        stream: _viewModel.outputSliderViewObject,
+        builder: (context, snapShot) {
+          return _getContentWidget(snapShot.data);
+        });
   }
 
-  Widget _getContentWidget() {
-    return Scaffold(
-      backgroundColor: ColorManager.white,
-      appBar: AppBar(
+  Widget _getContentWidget(SliderViewObject? sliderViewObject) {
+    if (sliderViewObject == null) {
+      return Container();
+    } else
+      return Scaffold(
         backgroundColor: ColorManager.white,
-        elevation: AppSize.s0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: ColorManager.white,
-          statusBarBrightness: Brightness.dark,
+        appBar: AppBar(
+          backgroundColor: ColorManager.white,
+          elevation: AppSize.s0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: ColorManager.white,
+            statusBarBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.dark,
+          ),
         ),
-      ),
-      body: PageView.builder(
-          controller: _pageController,
-          itemCount: _list.length,
-          onPageChanged: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          itemBuilder: (context, index) {
-            return OnBoardingPage(_list[index]);
-          }),
-      bottomSheet: Container(
-        color: ColorManager.white,
-        height: AppSize.s100,
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(onPressed: () {},
-                child: Text(
-                  AppStrings.skip,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .subtitle2,
-                  textAlign: TextAlign.end,
-                ),
-              ),
-            ),
-            _getBottomSheetWidget()
-          ],
+        body: PageView.builder(
+            controller: _pageController,
+            itemCount: sliderViewObject.numOfSlides,
+            onPageChanged: (index) {
+              _viewModel.onPageChanged(index);
+            },
+            itemBuilder: (context, index) {
+              return OnBoardingPage(sliderViewObject.sliderObject);
+            }),
+        bottomSheet: Container(
+          color: ColorManager.white,
+          height: AppSize.s100,
+          child: Column(
+            children: [
+              Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.loginRoute);
+                    },
+                    child: Text(
+                      AppStrings.skip,
+                      style: Theme.of(context).textTheme.subtitle2,
+                      textAlign: TextAlign.end,
+                    ),
+                  )),
+              // add layout for indicator and arrows
+              _getBottomSheetWidget(sliderViewObject)
+            ],
+          ),
         ),
-      ),
-    );
+      );
   }
 
-  Widget _getBottomSheetWidget() {
+  Widget _getBottomSheetWidget(SliderViewObject sliderViewObject) {
     return Container(
       color: ColorManager.primary,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(padding: EdgeInsets.all(AppPadding.p14),
+          // left arrow
+          Padding(
+            padding: EdgeInsets.all(AppPadding.p14),
             child: GestureDetector(
               child: SizedBox(
                 height: AppSize.s20,
@@ -94,23 +102,28 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 child: SvgPicture.asset(ImageAssets.leftArrowIc),
               ),
               onTap: () {
-                  _pageController.animateToPage(
-                      _getPreviousIndex(),
-                      duration:Duration(milliseconds: DurationConstant.d300),
-                      curve: Curves.bounceInOut
-                  );
+                // go to previous slide
+                _pageController.animateToPage(_viewModel.goPrevious(),
+                    duration: Duration(milliseconds: DurationConstant.d300),
+                    curve: Curves.bounceInOut);
               },
             ),
           ),
+
+          // circles indicator
           Row(
             children: [
-              for(int  i = 0; i < _list.length; i++)
-                  Padding(padding: EdgeInsets.all(AppPadding.p8),
-                    child: _getProperCircle(i),
-                  ),
+              for (int i = 0; i < sliderViewObject.numOfSlides; i++)
+                Padding(
+                  padding: EdgeInsets.all(AppPadding.p8),
+                  child: _getProperCircle(i, sliderViewObject.currentIndex),
+                )
             ],
           ),
-          Padding(padding: EdgeInsets.all(AppPadding.p14),
+
+          // right arrow
+          Padding(
+            padding: EdgeInsets.all(AppPadding.p14),
             child: GestureDetector(
               child: SizedBox(
                 height: AppSize.s20,
@@ -118,34 +131,36 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 child: SvgPicture.asset(ImageAssets.rightArrowIc),
               ),
               onTap: () {
-                _pageController.animateToPage(
-                    _getNextIndex(),
-                    duration:Duration(milliseconds: DurationConstant.d300),
-                    curve: Curves.bounceInOut
-                );
+                // go to next slide
+                _pageController.animateToPage(_viewModel.goNext(),
+                    duration: Duration(milliseconds: DurationConstant.d300),
+                    curve: Curves.bounceInOut);
               },
             ),
-          ),
+          )
         ],
       ),
     );
   }
 
-  Widget _getProperCircle(int index) {
-      if(index == _currentIndex) {
-        return SvgPicture.asset(ImageAssets.hollowCirlceIc);
-      } else {
-        return SvgPicture.asset(ImageAssets.solidCircleIc);
-      }
+  Widget _getProperCircle(int index, int _currentIndex) {
+    if (index == _currentIndex) {
+      return SvgPicture.asset(ImageAssets.hollowCirlceIc); // selected slider
+    } else {
+      return SvgPicture.asset(ImageAssets.solidCircleIc); // unselected slider
+    }
   }
+
   @override
   void dispose() {
     _viewModel.dispose();
     super.dispose();
   }
 }
+
 class OnBoardingPage extends StatelessWidget {
   SliderObject _sliderObject;
+
   OnBoardingPage(this._sliderObject, {Key? key}) : super(key: key);
 
   @override
@@ -153,7 +168,7 @@ class OnBoardingPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        SizedBox(height: AppSize.s40,),
+        SizedBox(height: AppSize.s40),
         Padding(
           padding: const EdgeInsets.all(AppPadding.p8),
           child: Text(
@@ -173,7 +188,8 @@ class OnBoardingPage extends StatelessWidget {
         SizedBox(
           height: AppSize.s60,
         ),
-        SvgPicture.asset(_sliderObject.image),
+        SvgPicture.asset(_sliderObject.image)
+        // image widget
       ],
     );
   }
