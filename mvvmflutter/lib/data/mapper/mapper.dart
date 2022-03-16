@@ -1,5 +1,4 @@
 
-
 import '/app/extensions.dart';
 import 'package:mvvmflutter/data/responses/responses.dart';
 import 'package:mvvmflutter/domain/model.dart';
