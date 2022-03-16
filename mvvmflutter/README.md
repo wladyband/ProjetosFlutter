@@ -5,6 +5,7 @@ A new Flutter project.
 ## Useful Command
 - flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 - flutter pub add dartz
+- flutter pub add pretty_dio_logger
 
 This project is a starting point for a Flutter application.
 
