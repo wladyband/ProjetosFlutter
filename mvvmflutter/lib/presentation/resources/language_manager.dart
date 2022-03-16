@@ -1,6 +1,6 @@
 enum LanguageType { ENGLISH, PORTUGUESE }
 
-const String ARABIC = "pt";
+const String PORTUGUESE = "pt";
 const String ENGLISH = "en";
 
 extension LanguageTypeExtension on LanguageType {
@@ -9,7 +9,7 @@ extension LanguageTypeExtension on LanguageType {
       case LanguageType.ENGLISH:
         return ENGLISH;
       case LanguageType.PORTUGUESE:
-        return ARABIC;
+        return PORTUGUESE;
     }
   }
 }

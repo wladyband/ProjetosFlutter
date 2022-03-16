@@ -6,3 +6,4 @@ export './theme_manager.dart';
 export './strings_manager.dart';
 export './routes_manager.dart';
 export './assets_manager.dart';
+export './language_manager.dart';
