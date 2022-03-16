@@ -6,6 +6,7 @@ A new Flutter project.
 - flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 - flutter pub add dartz
 - flutter pub add pretty_dio_logger
+- flutter pub add shared_preferences
 
 This project is a starting point for a Flutter application.
 
