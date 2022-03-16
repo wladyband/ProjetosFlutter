@@ -7,6 +7,7 @@ A new Flutter project.
 - flutter pub add dartz
 - flutter pub add pretty_dio_logger
 - flutter pub add shared_preferences
+- flutter pub add device_info
 
 This project is a starting point for a Flutter application.
 
