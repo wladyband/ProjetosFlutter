@@ -4,11 +4,11 @@ import 'package:mvvmflutter/data/network/error_handler.dart';
 import 'package:mvvmflutter/data/network/network_info.dart';
 import 'package:mvvmflutter/data/network/network_main.dart';
 import 'package:mvvmflutter/data/request/request.dart';
-import 'package:mvvmflutter/domain/model.dart';
+import 'package:mvvmflutter/domain/model/model.dart';
 import 'package:mvvmflutter/data/mapper/mapper.dart';
 import 'package:mvvmflutter/data/data_source/remote_data_source.dart';
 
-import '../../domain/repository.dart';
+import '../../domain/repository/repository.dart';
 
 class RepositoryImpl extends Repository {
   RemoteDataSource _remoteDataSource;

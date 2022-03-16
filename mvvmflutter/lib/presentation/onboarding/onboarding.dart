@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mvvmflutter/presentation/onboarding/onboarding_main.dart';
 import 'package:mvvmflutter/presentation/resources/resources.dart';
 
-import '../../domain/model.dart';
+import '../../domain/model/model.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({Key? key}) : super(key: key);
