@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:mvvmflutter/app/app_main.dart';
 import 'package:mvvmflutter/data/network/network_main.dart';
 import 'package:mvvmflutter/data/request/request.dart';
 import 'package:mvvmflutter/domain/model/model.dart';
@@ -13,14 +14,11 @@ class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication> {
   @override
   Future<Either<Failure, Authentication>> execute(
       LoginUseCaseInput input) async {
-    await _repository
-        .login(LoginRequest(input.email, input.password, "imei", "deviceType"));
+    DeviceInfo deviceInfo = await getDeviceDetails();
+    return await _repository.login(LoginRequest(
+        input.email, input.password, deviceInfo.identifier, deviceInfo.name));
   }
 }
-
-
-
-
 
 class LoginUseCaseInput {
   String email;
