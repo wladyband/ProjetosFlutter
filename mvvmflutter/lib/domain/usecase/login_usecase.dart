@@ -1,10 +1,10 @@
+import '/app/functions.dart';
+import '/data/network/failure.dart';
+import '/data/request/request.dart';
+import '/domain/model/model.dart';
+import '/domain/repository/repository.dart';
+import '/domain/usecase/base_usecase.dart';
 import 'package:dartz/dartz.dart';
-import 'package:mvvmflutter/app/app_main.dart';
-import 'package:mvvmflutter/data/network/network_main.dart';
-import 'package:mvvmflutter/data/request/request.dart';
-import 'package:mvvmflutter/domain/model/model.dart';
-import 'package:mvvmflutter/domain/repository/repository.dart';
-import 'package:mvvmflutter/domain/usecase/base_usecase.dart';
 
 class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication> {
   Repository _repository;

@@ -1,7 +1,7 @@
+import '/app/app_prefs.dart';
+import '/app/constant.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mvvmflutter/app/app_main.dart';
-import 'package:mvvmflutter/app/app_prefs.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 const String APPLICATION_JSON = "application/json";

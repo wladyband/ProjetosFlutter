@@ -1,6 +1,12 @@
+import '/presentation/forgot_password/forgot_password.dart';
+import '/presentation/login/login.dart';
+import '/presentation/main/main_view.dart';
+import '/presentation/onboarding/onboarding.dart';
+import '/presentation/register/register.dart';
+import '/presentation/resources/strings_manager.dart';
+import '/presentation/splash/splash.dart';
+import '/presentation/store_details/store_details.dart';
 import 'package:flutter/material.dart';
-import '/presentation/resources/resources.dart';
-import '/presentation/views.dart';
 
 class Routes {
   static const String splashRoute = "/";
@@ -12,7 +18,7 @@ class Routes {
   static const String storeDetailsRoute = "/storeDetails";
 }
 
-class RouterGenerator {
+class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.splashRoute:
@@ -30,20 +36,17 @@ class RouterGenerator {
       case Routes.storeDetailsRoute:
         return MaterialPageRoute(builder: (_) => StoreDetailsView());
       default:
-        return unDefindedRoute();
+        return unDefinedRoute();
     }
   }
 
-static Route<dynamic> unDefindedRoute () {
-  return MaterialPageRoute(builder: (_) => Scaffold(
-      appBar: AppBar(
-        title: Text(AppStrings.noRouteFound),
-      ),
-      body: Center(
-        child: Text(AppStrings.noRouteFound),
-      ),
-    ),
-  );
-}
-
+  static Route<dynamic> unDefinedRoute() {
+    return MaterialPageRoute(
+        builder: (_) => Scaffold(
+              appBar: AppBar(
+                title: Text(AppStrings.noRouteFound),
+              ),
+              body: Center(child: Text(AppStrings.noRouteFound)),
+            ));
+  }
 }

@@ -1,8 +1,7 @@
+import '/app/constant.dart';
+import '/data/responses/responses.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
-
-import '/app/app_main.dart';
-import '/data/responses/responses.dart';
 
 part 'app_api.g.dart';
 
@@ -12,9 +11,9 @@ abstract class AppServiceClient {
 
   @POST("/customers/login")
   Future<AuthenticationResponse> login(
-      @Field("email") String email,
-      @Field("password") String password,
-      @Field("imei") String imei,
-      @Field("deviceType") String deviceType,
-      );
+    @Field("email") String email,
+    @Field("password") String password,
+    @Field("imei") String imei,
+    @Field("deviceType") String deviceType,
+  );
 }

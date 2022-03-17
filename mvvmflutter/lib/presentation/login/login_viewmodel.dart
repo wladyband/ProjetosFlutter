@@ -1,18 +1,18 @@
 import 'dart:async';
 
-import 'package:mvvmflutter/domain/usecase/login_usecase.dart';
-import 'package:mvvmflutter/presentation/base/baseviewmodel.dart';
-import 'package:mvvmflutter/presentation/common/freezed_data_classes.dart';
+import '/domain/usecase/login_usecase.dart';
+import '/presentation/base/baseviewmodel.dart';
+import '/presentation/common/freezed_data_classes.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
   StreamController _userNameStreamController =
-  StreamController<String>.broadcast();
+      StreamController<String>.broadcast();
   StreamController _passwordStreamController =
-  StreamController<String>.broadcast();
+      StreamController<String>.broadcast();
 
   StreamController _isAllInputsValidStreamController =
-  StreamController<void>.broadcast();
+      StreamController<void>.broadcast();
 
   var loginObject = LoginObject("", "");
 
@@ -44,17 +44,17 @@ class LoginViewModel extends BaseViewModel
 
   @override
   login() async {
-    (await _loginUseCase.execute(
-        LoginUseCaseInput(loginObject.userName, loginObject.password)))
-        .fold(
-            (failure) => {
-          // left -> failure
-          print(failure.message)
-        },
-            (data) => {
-          // right -> success (data)
-          print(data.customer?.name)
-        });
+    // (await _loginUseCase.execute(
+    //         LoginUseCaseInput(loginObject.userName, loginObject.password)))
+    //     .fold(
+    //         (failure) => {
+    //               // left -> failure
+    //               print(failure.message)
+    //             },
+    //         (data) => {
+    //               // right -> success (data)
+    //               print(data.customer?.name)
+    //             });
   }
 
   @override

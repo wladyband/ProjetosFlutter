@@ -1,7 +1,9 @@
-
 import '/app/extensions.dart';
-import 'package:mvvmflutter/data/responses/responses.dart';
-import 'package:mvvmflutter/domain/model/model.dart';
+
+// to convert the response into a non nullable object (model)
+
+import '/data/responses/responses.dart';
+import '/domain/model/model.dart';
 
 const EMPTY = "";
 const ZERO = 0;

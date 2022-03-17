@@ -1,7 +1,8 @@
 import 'dart:io';
+
+import '/domain/model/model.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/services.dart';
-import 'package:mvvmflutter/domain/model/model.dart';
 
 Future<DeviceInfo> getDeviceDetails() async {
   String name = "Unknown";

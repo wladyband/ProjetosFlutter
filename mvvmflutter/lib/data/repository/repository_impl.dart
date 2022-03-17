@@ -1,21 +1,18 @@
+import '/data/data_source/remote_data_source.dart';
+import '/data/network/error_handler.dart';
+import '/data/network/failure.dart';
+import '/data/network/network_info.dart';
+import '/data/request/request.dart';
+import '/domain/model/model.dart';
+import '/domain/repository/repository.dart';
 import 'package:dartz/dartz.dart';
-import 'package:mvvmflutter/data/network/error_handler.dart';
-
-import 'package:mvvmflutter/data/network/network_info.dart';
-import 'package:mvvmflutter/data/network/network_main.dart';
-import 'package:mvvmflutter/data/request/request.dart';
-import 'package:mvvmflutter/domain/model/model.dart';
-import 'package:mvvmflutter/data/mapper/mapper.dart';
-import 'package:mvvmflutter/data/data_source/remote_data_source.dart';
-
-import '../../domain/repository/repository.dart';
+import '/data/mapper/mapper.dart';
 
 class RepositoryImpl extends Repository {
   RemoteDataSource _remoteDataSource;
   NetworkInfo _networkInfo;
 
   RepositoryImpl(this._remoteDataSource, this._networkInfo);
-
 
   @override
   Future<Either<Failure, Authentication>> login(
@@ -26,7 +23,7 @@ class RepositoryImpl extends Repository {
         final response = await _remoteDataSource.login(loginRequest);
 
         if (response.status == ApiInternalStatus.SUCCESS) // success
-            {
+        {
           // return data (success)
           // return right
           return Right(response.toDomain());

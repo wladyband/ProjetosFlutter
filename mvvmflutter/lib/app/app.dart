@@ -1,15 +1,17 @@
+import '/presentation/resources/routes_manager.dart';
+import '/presentation/resources/theme_manager.dart';
 import 'package:flutter/material.dart';
-import '/presentation/resources/resources.dart';
 
 class MyApp extends StatefulWidget {
-
-  MyApp._internal();
+  MyApp._internal(); // private named constructor
   int appState = 0;
-  static final MyApp instance = MyApp._internal();
-  factory MyApp() => instance;
+  static final MyApp instance =
+      MyApp._internal(); // single instance -- singleton
+
+  factory MyApp() => instance; // factory for the class instance
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -17,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: RouterGenerator.getRoute,
+      onGenerateRoute: RouteGenerator.getRoute,
       initialRoute: Routes.splashRoute,
       theme: getApplicationTheme(),
     );

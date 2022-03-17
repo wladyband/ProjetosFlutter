@@ -1,5 +1,5 @@
+import '/data/network/failure.dart';
 import 'package:dio/dio.dart';
-import 'package:mvvmflutter/data/network/network_main.dart';
 
 enum DataSource {
   SUCCESS,
@@ -107,9 +107,9 @@ class ResponseCode {
   static const int FORBIDDEN = 403; // failure, api rejected the request
   static const int UNAUTHORISED = 401; // failure user is not authorised
   static const int NOT_FOUND =
-  404; // failure, api url is not correct and not found
+      404; // failure, api url is not correct and not found
   static const int INTERNAL_SERVER_ERROR =
-  500; // failure, crash happened in server side
+      500; // failure, crash happened in server side
 
   // local status code
   static const int DEFAULT = -1;

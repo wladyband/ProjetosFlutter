@@ -1,4 +1,6 @@
-import 'package:mvvmflutter/data/mapper/mapper.dart';
+// extension on String
+
+import '/data/mapper/mapper.dart';
 
 extension NonNullString on String? {
   String orEmpty() {
