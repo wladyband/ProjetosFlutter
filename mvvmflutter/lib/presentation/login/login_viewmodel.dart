@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:mvvmflutter/presentation/base/baseviewmodel.dart';
+import 'package:mvvmflutter/presentation/common/freezed_data_classes.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
@@ -8,6 +9,8 @@ class LoginViewModel extends BaseViewModel
   StreamController<String>.broadcast();
   StreamController _passwordStreamController =
   StreamController<String>.broadcast();
+
+  var loginObject = LoginObject("","");
 
   // inputs
   @override
@@ -35,14 +38,12 @@ class LoginViewModel extends BaseViewModel
 
   @override
   setPassword(String password) {
-    // TODO: implement setPassword
-    throw UnimplementedError();
+    inputPassword.add(password);
   }
 
   @override
   setUserName(String userName) {
-    // TODO: implement setUserName
-    throw UnimplementedError();
+    inputUserName.add(userName);
   }
 
   // outputs
