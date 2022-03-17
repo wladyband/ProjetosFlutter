@@ -1,5 +1,5 @@
 import '/presentation/resources/routes_manager.dart';
-
+import '/app/di.dart';
 import '/presentation/login/login_viewmodel.dart';
 import '/presentation/resources/assets_manager.dart';
 import '/presentation/resources/color_manager.dart';
@@ -15,7 +15,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  LoginViewModel _viewModel = LoginViewModel(loginUseCase);
+
+  LoginViewModel _viewModel = instance<LoginViewModel>();
 
   TextEditingController _userNameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();

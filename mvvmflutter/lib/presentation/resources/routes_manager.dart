@@ -1,3 +1,5 @@
+import 'package:mvvmflutter/app/di.dart';
+
 import '/presentation/forgot_password/forgot_password.dart';
 import '/presentation/login/login.dart';
 import '/presentation/main/main_view.dart';
@@ -24,6 +26,7 @@ class RouteGenerator {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => SplashView());
       case Routes.loginRoute:
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => LoginView());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingView());

@@ -6,6 +6,8 @@ import 'package:mvvmflutter/data/network/dio_factory.dart';
 import 'package:mvvmflutter/data/network/network_info.dart';
 import 'package:mvvmflutter/data/repository/repository_impl.dart';
 import 'package:mvvmflutter/domain/repository/repository.dart';
+import 'package:mvvmflutter/domain/usecase/login_usecase.dart';
+import 'package:mvvmflutter/presentation/login/login_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_prefs.dart';
@@ -39,4 +41,11 @@ Future<void> initAppModule() async {
   // repository
   instance.registerLazySingleton<Repository>(
           () => RepositoryImpl(instance(), instance()));
+}
+
+initLoginModule() {
+  if (!GetIt.I.isRegistered<LoginUseCase>()) {
+    instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
+    instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+  }
 }
