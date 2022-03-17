@@ -7,16 +7,16 @@ import '/presentation/common/freezed_data_classes.dart';
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
   StreamController _userNameStreamController =
-      StreamController<String>.broadcast();
+  StreamController<String>.broadcast();
   StreamController _passwordStreamController =
-      StreamController<String>.broadcast();
+  StreamController<String>.broadcast();
 
   StreamController _isAllInputsValidStreamController =
-      StreamController<void>.broadcast();
+  StreamController<void>.broadcast();
 
   var loginObject = LoginObject("", "");
 
-  LoginUseCase? _loginUseCase; // todo remove ?
+  LoginUseCase _loginUseCase;
 
   LoginViewModel(this._loginUseCase);
 
@@ -45,16 +45,16 @@ class LoginViewModel extends BaseViewModel
   @override
   login() async {
     (await _loginUseCase.execute(
-            LoginUseCaseInput(loginObject.userName, loginObject.password)))
+        LoginUseCaseInput(loginObject.userName, loginObject.password)))
         .fold(
             (failure) => {
-                  // left -> failure
-                  print(failure.message)
-                },
+          // left -> failure
+          print(failure.message)
+        },
             (data) => {
-                  // right -> success (data)
-                  print(data.customer?.name)
-                });
+          // right -> success (data)
+          print(data.customer?.name)
+        });
   }
 
   @override
