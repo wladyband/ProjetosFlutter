@@ -12,7 +12,7 @@ class LoginViewModel extends BaseViewModel
   StreamController<String>.broadcast();
 
   var loginObject = LoginObject("","");
-  LoginUseCase _loginUseCase;
+  LoginUseCase? _loginUseCase;
   LoginViewModel(this._loginUseCase);
 
   // inputs
