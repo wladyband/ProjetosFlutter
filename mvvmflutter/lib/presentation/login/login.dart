@@ -58,6 +58,32 @@ class _LoginViewState extends State<LoginView> {
                       return TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         controller: _userNameController,
+                        decoration: InputDecoration(
+                            hintText: AppStrings.username,
+                            labelText: AppStrings.username,
+                            errorText: (snapshot.data ?? true)
+                                ? null
+                                : AppStrings.usernameError
+                        ),
+                      );
+                    },
+                  ),),
+                SizedBox(height: AppSize.s28),
+                Padding(padding: EdgeInsets.only(
+                    left: AppPadding.p28, right: AppPadding.p28),
+                  child: StreamBuilder<bool>(
+                    stream: _viewModel.outputIsPasswordValid,
+                    builder: (context, snapshot) {
+                      return TextFormField(
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                            hintText: AppStrings.password,
+                            labelText: AppStrings.password,
+                            errorText: (snapshot.data ?? true)
+                                ? null
+                                : AppStrings.passwordError
+                        ),
                       );
                     },
                   ),)
@@ -66,7 +92,7 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
       ),
-    )
+    );
   }
 
   @override
