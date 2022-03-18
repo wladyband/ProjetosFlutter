@@ -8,6 +8,7 @@ A new Flutter project.
 - flutter pub add pretty_dio_logger
 - flutter pub add shared_preferences
 - flutter pub add device_info
+- [flutter run --no-sound-null-safety](https://stackoverflow.com/questions/64917744/cannot-run-with-sound-null-safety-because-dependencies-dont-support-null-safety) 
 
 This project is a starting point for a Flutter application.
 
